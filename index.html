@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛡️ مستشارك السيبراني | أيمن ونيس</title>
-    <!-- استيراد خطوط جوجل لتصميم أجمل -->
     <link href="https://googleapis.com" rel="stylesheet">
     <style>
         body {
@@ -30,56 +29,24 @@
         }
         h2 { color: #38bdf8; margin-bottom: 5px; }
         .credit { font-size: 14px; color: #94a3b8; margin-bottom: 25px; font-style: italic; }
-        
         textarea {
-            width: 100%;
-            height: 120px;
-            padding: 15px;
-            border-radius: 12px;
-            border: 1px solid #475569;
-            background: #0f172a;
-            color: white;
-            resize: none;
-            box-sizing: border-box;
-            font-size: 16px;
-            margin-bottom: 15px;
-            outline: none;
+            width: 100%; height: 120px; padding: 15px; border-radius: 12px; border: 1px solid #475569;
+            background: #0f172a; color: white; resize: none; box-sizing: border-box; font-size: 16px;
+            margin-bottom: 15px; outline: none;
         }
         textarea:focus { border-color: #38bdf8; }
-
         button {
-            width: 100%;
-            padding: 12px;
-            background: #0284c7;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
+            width: 100%; padding: 12px; background: #0284c7; color: white; border: none;
+            border-radius: 12px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s;
         }
         button:hover { background: #0369a1; transform: translateY(-2px); }
         button:disabled { background: #475569; cursor: not-allowed; }
-
         #response {
-            margin-top: 25px;
-            padding: 20px;
-            background: #334155;
-            border-radius: 12px;
-            line-height: 1.8;
-            font-size: 15px;
-            display: none;
-            text-align: right;
-            border-right: 5px solid #38bdf8;
-            white-space: pre-wrap;
+            margin-top: 25px; padding: 20px; background: #334155; border-radius: 12px;
+            line-height: 1.8; font-size: 15px; display: none; text-align: right;
+            border-right: 5px solid #38bdf8; white-space: pre-wrap;
         }
-        .loader {
-            display: none;
-            margin: 20px 0;
-            color: #38bdf8;
-            font-weight: bold;
-        }
+        .loader { display: none; margin: 20px 0; color: #38bdf8; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -87,11 +54,8 @@
 <div class="container">
     <h2>🛡️ مستشارك السيبراني</h2>
     <div class="credit">عمل خيري مقدم من أيمن ونيس</div>
-    
     <textarea id="userQuestion" placeholder="اسأل عن أمن الموبايل، الشبكات، أو أي تهديد رقمي..."></textarea>
-    
     <button onclick="askAI()" id="sendBtn">إرسال الاستفسار</button>
-    
     <div id="loader" class="loader">جاري تحليل طلبك أمنياً... 🛡️</div>
     <div id="response"></div>
 </div>
@@ -103,29 +67,24 @@
         const loader = document.getElementById("loader");
         const responseDiv = document.getElementById("response");
 
-        if (!question) {
-            alert("من فضلك اكتب سؤالك أولاً");
-            return;
-        }
+        if (!question) { alert("من فضلك اكتب سؤالك أولاً"); return; }
 
-        // إعداد الواجهة أثناء التفكير
         btn.disabled = true;
         loader.style.display = "block";
         responseDiv.style.display = "none";
 
+        // مفتاح الـ API الخاص بك
         const API_KEY = "AIzaSyDraOJHuCeklucWSu-rhfY52EA-No_nMcA"; 
-        const url = `https://googleapis.com{API_KEY}`;
-
-        const payload = {
-            "contents":
-            }]
-        };
+        // الرابط المحدث للإصدار المستقر
+        const url = "https://googleapis.com" + API_KEY;
 
         try {
             const response = await fetch(url, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(payload)
+                body: JSON.stringify({
+                    "contents": }]
+                })
             });
 
             const data = await response.json();
@@ -135,7 +94,7 @@
                 responseDiv.innerText = answer;
                 responseDiv.style.display = "block";
             } else {
-                responseDiv.innerText = "عذراً، لم أتمكن من الحصول على إجابة. تأكد من تفعيل مفتاح الـ API.";
+                responseDiv.innerText = "عذراً، حدث خطأ في الرد. تأكد من تفعيل المفتاح في Google AI Studio.";
                 responseDiv.style.display = "block";
             }
         } catch (error) {
